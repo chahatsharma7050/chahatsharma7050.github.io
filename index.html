@@ -1,0 +1,420 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>FitTrack - All-in-One Fitness</title>
+  <script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+  <style>
+    body {
+      margin: 0;
+      font-family: 'Segoe UI', sans-serif;
+      background: black;
+      color: #ccc;
+      scroll-behavior: smooth;
+    }
+
+    nav {
+      background: #111;
+      padding: 1rem 2rem;
+      position: sticky;
+      top: 0;
+      z-index: 999;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      box-shadow: 0 4px 12px rgba(0, 255, 153, 0.2);
+    }
+
+    nav a {
+      color: #00ff99;
+      text-decoration: none;
+      margin: 0 1rem;
+      font-weight: bold;
+      transition: color 0.3s ease;
+    }
+
+    nav a:hover {
+      color: #fff;
+    }
+
+    header {
+      background: #111;
+      color: #00ff99;
+      padding: 20px 40px;
+      text-align: center;
+      box-shadow: 0 4px 12px rgba(0, 255, 153, 0.2);
+    }
+
+    header h1 {
+      margin: 0;
+      font-size: 2.8em;
+      animation: pulse 2s infinite;
+    }
+
+    @keyframes pulse {
+      0%, 100% { transform: scale(1); }
+      50% { transform: scale(1.05); }
+    }
+
+    .video-hero {
+      position: relative;
+      height: 400px;
+      overflow: hidden;
+      border-bottom: 4px solid #2e8b57;
+    }
+
+    .video-hero video {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+    }
+
+    .hero-text {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      transform: translate(-50%, -50%);
+      color: #fff;
+      font-size: 3em;
+      background: rgba(46, 139, 87, 0.7);
+      padding: 20px 30px;
+      border-radius: 12px;
+      text-align: center;
+      font-weight: bold;
+      animation: fadeInDown 1.5s ease-out;
+    }
+
+    @keyframes fadeInDown {
+      from { opacity: 0; transform: translate(-50%, -70%); }
+      to { opacity: 1; transform: translate(-50%, -50%); }
+    }
+
+    section {
+      padding: 4rem 2rem;
+      max-width: 1100px;
+      margin: auto;
+      animation: fadeIn 1.5s ease-in;
+    }
+
+    @keyframes fadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to { opacity: 1; transform: translateY(0); }
+    }
+
+    .section-title {
+      text-align: center;
+      color: #00ff99;
+      margin-bottom: 2rem;
+      font-size: 2.4em;
+      text-shadow: 2px 2px #000;
+    }
+
+    .about-section, .why-section, .pricing-section, .bmi-section {
+      background-color: #1c1c1c;
+      border-radius: 12px;
+      box-shadow: 0 4px 20px rgba(0,255,153,0.2);
+      margin-bottom: 2rem;
+      padding: 2rem;
+      color: #eee;
+    }
+
+    .about-section img, .team img, .gallery img {
+      max-width: 100%;
+      border-radius: 10px;
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .gallery img:hover {
+      transform: scale(1.05);
+      box-shadow: 0 8px 20px rgba(255, 255, 255, 0.2);
+    }
+
+    .team {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+      gap: 1.5rem;
+      margin-top: 2rem;
+    }
+
+    .team-member {
+      background-color: #2a2a2a;
+      padding: 1rem;
+      border-radius: 8px;
+      text-align: center;
+      color: #eee;
+    }
+
+    .features, .pricing-plans {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+      gap: 2rem;
+    }
+
+    .feature, .plan {
+      background-color: #2a2a2a;
+      padding: 1.5rem;
+      border-radius: 10px;
+      text-align: center;
+      transition: transform 0.3s ease;
+      color: #eee;
+    }
+
+    .feature:hover, .plan:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 6px 15px rgba(0, 255, 153, 0.2);
+    }
+
+    .plan {
+      background-color: #3b4d61;
+    }
+
+    .price {
+      font-size: 2rem;
+      margin: 1rem 0;
+    }
+
+    .bmi-section input, .bmi-section button {
+      width: 100%;
+      padding: 0.7rem;
+      margin-bottom: 1rem;
+      border-radius: 8px;
+      border: none;
+    }
+
+    .bmi-section button {
+      background-color: #00cc88;
+      color: white;
+      font-weight: bold;
+      cursor: pointer;
+    }
+
+    .login-box {
+      background-color: #1c1c1c;
+      padding: 2rem 2.5rem;
+      border-radius: 12px;
+      box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+      width: 100%;
+      max-width: 400px;
+      margin: 4rem auto;
+      color: #eee;
+    }
+
+    .login-box button {
+      width: 100%;
+      padding: 0.8rem;
+      border-radius: 8px;
+      font-size: 1rem;
+    }
+
+    .login-btn {
+      background-color: #2e8b57;
+      color: white;
+      border: none;
+      margin-bottom: 1rem;
+    }
+
+    .google-btn {
+      background-color: #4285f4;
+      color: white;
+      border: none;
+    }
+
+    .gallery {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 1.5rem;
+      padding: 2rem 0;
+    }
+
+    .page-img {
+      width: 100%;
+      max-width: 600px;
+      margin: 2rem auto;
+      display: block;
+      border-radius: 10px;
+      box-shadow: 0 4px 12px rgba(0,255,153,0.15);
+    }
+
+    .fade-in-section {
+      opacity: 0;
+      transform: translateY(20px);
+      transition: opacity 1s ease-out, transform 1s ease-out;
+    }
+
+    .fade-in-section.visible {
+      opacity: 1;
+      transform: none;
+    }
+  </style>
+  <script>
+    window.addEventListener('scroll', () => {
+      document.querySelectorAll('.fade-in-section').forEach(section => {
+        const rect = section.getBoundingClientRect();
+        if (rect.top < window.innerHeight - 100) {
+          section.classList.add('visible');
+        }
+      });
+    });
+  </script>
+</head>
+<body>
+
+  <nav>
+    <div><a href="#">🏋️ FitTrack</a></div>
+    <div>
+      <a href="#about">About</a>
+      <a href="#gallery">Gallery</a>
+      <a href="#why">Why Us</a>
+      <a href="#pricing">Pricing</a>
+      <a href="#bmi">BMI</a>
+      <a href="#login">Login</a>
+    </div>
+  </nav>
+
+  <header>
+    <h1>FitTrack</h1>
+  </header>
+
+  <div class="video-hero">
+    <video autoplay muted loop>
+      <source src="https://media.tenor.com/qdJuEFVp0DZAAAPo/tenor.mp4" type="video/mp4">
+      Your browser does not support the video tag.
+    </video>
+    <div class="hero-text">Stay Fit, Stay Strong with FitTrack</div>
+  </div>
+
+  <section class="about-section">
+    <h2 class="section-title">About Us</h2>
+    <p>At FitTrack, we help people take control of their health and fitness through smart, intuitive tracking tools.</p>
+    <img src="https://as2.ftcdn.net/v2/jpg/04/33/25/61/1000_F_433256163_LFG9IjaW1c7IisLPaJ0RhYlgXiNa8GUJ.jpg" alt="fitness" />
+    <div class="team">
+      <div class="team-member">
+        <h4>MEHAK KHAN</h4>
+        <p>Co-founder & Product Designer</p>
+      </div>
+      <div class="team-member">
+        <h4>CHAHAT SHARMA</h4>
+        <p>Lead Developer</p>
+      </div>
+      <div class="team-member">
+        <h4>MEHAK KHAN</h4>
+        <p>Fitness Coach & Content Strategist</p>
+      </div>
+      <div class="team-member">
+        <h4>CHAHAT SHARMA</h4>
+        <p>Data Analyst</p>
+      </div>
+    </div>
+  </section>
+
+  <section id="gallery" class="fade-in-section gallery">
+    <img src="https://wallpaperaccess.com/full/1078038.jpg">
+    <img src="https://tse4.mm.bing.net/th?id=OIP.fcGH8_4nDYO2ct3nGdIoBQHaFA&pid=Api&P=0&h=180">
+    <img src="https://cdn.shopify.com/s/files/1/0534/2583/2130/files/better_than_you_used_to_be.gif?v=1661460904">
+    <img src="https://bodybuilding-wizard.com/wp-content/uploads/2019/08/components-of-physical-fitness.jpg">
+  </section>
+  <section class="why-section">
+    <h2 class="section-title">Why Choose Us</h2>
+    <div class="features">
+      <div class="feature">
+        <i class="fas fa-heartbeat"></i>
+        <h4>Real-Time Health Tracking</h4>
+        <p>Track heart rate, steps, calories, and sleep with accuracy.</p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-chart-line"></i>
+        <h4>Smart Insights</h4>
+        <p>Analyze patterns and make informed health decisions.</p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-user-friends"></i>
+        <h4>Community Support</h4>
+        <p>Join challenges and stay motivated with community support.</p>
+      </div>
+      <div class="feature">
+        <i class="fas fa-lock"></i>
+        <h4>Secure & Private</h4>
+        <p>Your health data is encrypted and safe.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="pricing-section">
+    <h2 class="section-title">Pricing Plans</h2>
+    <div class="pricing-plans">
+      <div class="plan">
+        <h3>Basic</h3>
+        <p class="price">Rs500 /mo</p>
+        <ul><li>Step Tracking</li><li>Water Logs</li><li>Basic Analytics</li></ul>
+        <button>Select Plan</button>
+      </div>
+      <div class="plan">
+        <h3>Pro</h3>
+        <p class="price">Rs1500 /mo</p>
+        <ul><li>All Basic Features</li><li>Heart Rate Monitoring</li><li>Sleep Tracking</li><li>Custom Workouts</li></ul>
+        <button>Select Plan</button>
+      </div>
+      <div class="plan">
+        <h3>Premium</h3>
+        <p class="price">Rs2500 /mo</p>
+        <ul><li>All Pro Features</li><li>1-on-1 Coaching</li><li>Nutrition Plans</li><li>Priority Support</li></ul>
+        <button>Select Plan</button>
+      </div>
+    </div>
+  </section>
+
+  <section class="bmi-section">
+    <h2 class="section-title">BMI Calculator</h2>
+    <label for="height">Height (cm)</label>
+    <input type="number" id="height" placeholder="e.g. 170">
+    <label for="weight">Weight (kg)</label>
+    <input type="number" id="weight" placeholder="e.g. 65">
+    <button onclick="calculateBMI()">Calculate BMI</button>
+    <div class="result" id="bmi-result"></div>
+    <div class="note">BMI Categories: Underweight &lt; 18.5, Normal 18.5–24.9, Overweight 25–29.9, Obese ≥ 30</div>
+  </section>
+
+  <div class="login-box">
+    <h2>Login to FitTrack</h2>
+    <form>
+      <label for="email">Email</label>
+      <input type="email" id="email" placeholder="you@example.com" required>
+      <label for="password">Password</label>
+      <input type="password" id="password" placeholder="Enter your password" required>
+      <button type="submit" class="login-btn">Login</button>
+      <button type="button" class="google-btn">Login with Google</button>
+    </form>
+    <p class="small">Don't have an account? Sign up</p>
+  </div>
+
+  <script>
+    function calculateBMI() {
+      const height = parseFloat(document.getElementById('height').value);
+      const weight = parseFloat(document.getElementById('weight').value);
+      const resultDiv = document.getElementById('bmi-result');
+
+      if (!height || !weight || height <= 0 || weight <= 0) {
+        resultDiv.textContent = 'Please enter valid height and weight.';
+        resultDiv.style.color = 'red';
+        return;
+      }
+
+      const heightInMeters = height / 100;
+      const bmi = weight / (heightInMeters * heightInMeters);
+      const roundedBMI = bmi.toFixed(1);
+
+      let category = '';
+      if (bmi < 18.5) category = 'Underweight';
+      else if (bmi < 25) category = 'Normal';
+      else if (bmi < 30) category = 'Overweight';
+      else category = 'Obese';
+
+      resultDiv.textContent = `Your BMI is ${roundedBMI} (${category})`;
+      resultDiv.style.color = '#2e8b57';
+    }
+  </script>
+
+</body>
+</html>
+
